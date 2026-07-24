@@ -3,13 +3,12 @@ pipeline{
     stages{
         stage('Code-Pull'){
             steps{
-                git branch: 'main', url: 'https://github.com/mayurmwagh/flight-reservation-app.git'    
+                git branch: 'main', url: 'https://github.com/mayurmwagh/flight-reservation-frontend.git'    
             }
         }
         stage('Code-Build'){
             steps{
                 sh '''
-                    cd frontend
                     npm install
                     npm run build
                 '''
@@ -18,9 +17,8 @@ pipeline{
         stage('Deploy'){
             steps{
                 sh '''
-                cd frontend
-                aws s3 sync dist/ s3://cblkdfsfdnewcjdnd-project-bux/ 
-                '''  
+                aws s3 sync dist/ s3://cblkdfdnewcjdnd-project-bux/ 
+               '''  
             }
         }
     }
